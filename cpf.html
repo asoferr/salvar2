@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cpf</title>
+    <link rel="stylesheet" href="cpf.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>API de Produtos de Limpeza</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="E-comerce.html">Produtos</a></li>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+<center>
+    <main>
+        <h1>E-commerce API - Músicas</h1>
+    <div id="imagem"></div>
+    <div id="nome"></div>
+    <div id="sobrenome"></div>
+    <div id="cidade"></div>
+    <div id="pais"></div>
+    <div id="link"></div>
+    
+    <input type="number" id="valor" placeholder="Digite o cpf">
+    <div id="erro"></div>
+    <br>
+    <button onclick="buscar()">buscar</button>
+    </main>
+    
+
+
+    <!--SCRIPT-->
+
+    <script>
+
+        function buscar() {
+        
+            fetch('dados.json').then(resposta => resposta.json()).then(corpo => {
+        
+                var identificador = document.getElementById('valor').value;
+                var encontrado = false;
+        
+                corpo.forEach(pessoa => {
+                if(identificador == pessoa.cpf) {
+                    var link1 = `<a href="${dados1.link}">Visite nosso site</a>`;
+                    document.getElementById('imagem').innerHTML = dados1.imagem;
+                    document.getElementById('nome').innerHTML = dados1.nome;
+                    document.getElementById('sobrenome').innerHTML = dados1.sobrenome;
+                    document.getElementById('cidade').innerHTML = dados1.cidade;
+                    document.getElementById('pais').innerHTML = dados1.pais;
+                    document.getElementById('link').innerHTML = link1;
+                    } else {
+                      document.getElementById('erro').innerHTML = "";
+                      encontrado = true;
+                    }
+                    
+                })
+                if(!encontrado) {
+                    document.getElementById('erro').innerHTML = "Registro inválido";
+                }
+                console.log(corpo)
+            });
+        
+            //var identificador = document.getElementById('valor').value;
+        
+        }
+    </script>
+
+
+    
+</body>
+</html>
